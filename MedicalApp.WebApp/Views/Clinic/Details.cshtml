@@ -1,0 +1,28 @@
+﻿@model MedicalApp.WebApp.Models.ClinicViewModel
+
+@{
+    ViewData["Title"] = "Detalles clínica";
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-12">
+        <h2 class="lead"><b>@Model.Name</b></h2><br />
+        <ul class="ml-4 mb-0 fa-ul text-muted">
+            <li class="mb-2"><span class="fa-li"><i class="fas fa-sm fa-building"></i></span> Dirección: @Model.Address</li>
+            <li class="mb-2"><span class="fa-li"><i class="fas fa-sm fa-phone"></i></span> Teléfono #: @Model.Telephone</li>
+            <li class="mb-2"><span class="fa-li"><i class="fas fa-sm fa-envelope"></i></span> Correo Electronico #: @Model.Email</li>
+            <li class="mb-2"><span class="fa-li"><i class="fas fa-sm fa-globe"></i></span> Sitio Web #: @Model.WebSite</li>
+        </ul>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-12">
+        <a href="#" class="btn btn-secondary btn-block" data-dismiss="modal">Cerrar</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

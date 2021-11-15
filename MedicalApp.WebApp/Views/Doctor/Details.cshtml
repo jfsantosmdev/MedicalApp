@@ -1,0 +1,29 @@
+﻿@model MedicalApp.WebApp.Models.DoctorViewModel
+@{
+    ViewData["Title"] = "Detalles doctor";
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-12">
+        <h2 class="lead">
+            @string.Format("{0} {1}", Model.Name, Model.LastName)
+            <br />
+            @*<small>@Model.Summary</small>*@
+        </h2>
+        <p class="text-muted text-sm"><b>Especialidad: </b>@Model.Speciality</p>
+        <ul class="ml-4 mb-0 fa-ul text-muted">
+            <li class="mb-2"><span class="fa-li"><i class="fas fa-sm fa-phone"></i></span> Teléfono #: @Model.Phone</li>
+        </ul>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-12">
+        <a href="#" class="btn btn-secondary btn-block" data-dismiss="modal">Cerrar</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

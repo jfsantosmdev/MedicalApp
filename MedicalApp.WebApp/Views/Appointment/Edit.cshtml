@@ -1,0 +1,118 @@
+﻿@model MedicalApp.WebApp.Models.AppointmentViewModel
+
+@{
+    ViewData["Title"] = "Editar cita";
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit" asp-route-id="@Model.Id" onsubmit="return AddOrEditAppointment(this);">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="ClinicId" class="control-label"></label>
+                <select asp-for="ClinicId" asp-items="Model.ListOfClincs" class="form-control"></select>
+                <span asp-validation-for="ClinicId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DoctorId" class="control-label"></label>
+                <select asp-for="DoctorId" asp-items="Model.ListOfDoctors" class="form-control"></select>
+                <span asp-validation-for="DoctorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PatientId" class="control-label"></label>
+                <select asp-for="PatientId" asp-items="Model.ListOfPatients" class="form-control"></select>
+                <span asp-validation-for="PatientId" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="DateTimeStart" class="control-label"></label>
+                        <input asp-for="DateTimeStart" placeholder="DD/MM/YYYY HH:mm" class="form-control"/>
+                        @*<div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                            <input asp-for="DateTimeStart" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" autocomplete="off" />
+                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>*@
+                        <span asp-validation-for="DateTimeStart" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="DateTimeEnd" class="control-label"></label>
+                        <input asp-for="DateTimeEnd" placeholder="DD/MM/YYYY HH:mm" class="form-control"/>
+                        @*<div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+                            <input asp-for="DateTimeEnd" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" autocomplete="off" />
+                            <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>*@
+                        <span asp-validation-for="DateTimeEnd" class="text-danger"></span>
+                    </div>
+                </div>
+                @*<script type="text/javascript">
+                    $(function () {
+                        $('#datetimepicker1').datetimepicker({
+                            format: 'DD/MM/YYYY HH:mm',
+                            useCurrent: false,
+                            showTodayButton: true,
+                            showClear: true,
+                            toolbarPlacement: 'bottom',
+                            sideBySide: true,
+                            stepping: 15,
+                            icons: {
+                                time: "fa fa-clock-o",
+                                date: "fa fa-calendar",
+                                up: "fa fa-arrow-up",
+                                down: "fa fa-arrow-down",
+                                previous: "fa fa-chevron-left",
+                                next: "fa fa-chevron-right",
+                                today: "fa fa-clock-o",
+                                clear: "fa fa-trash-o"
+                            }
+                        });
+
+                        $('#datetimepicker2').datetimepicker({
+                            format: 'DD/MM/YYYY HH:mm',
+                            useCurrent: false,
+                            showTodayButton: true,
+                            showClear: true,
+                            toolbarPlacement: 'bottom',
+                            sideBySide: true,
+                            stepping: 15,
+                            icons: {
+                                time: "fa fa-clock-o",
+                                date: "fa fa-calendar",
+                                up: "fa fa-arrow-up",
+                                down: "fa fa-arrow-down",
+                                previous: "fa fa-chevron-left",
+                                next: "fa fa-chevron-right",
+                                today: "fa fa-clock-o",
+                                clear: "fa fa-trash-o"
+                            }
+                        });
+                    });
+                </script>*@
+            </div>
+            <div class="form-group">
+                <label asp-for="Reason" class="control-label"></label>
+                <input asp-for="Reason" class="form-control" />
+                <span asp-validation-for="Reason" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Note" class="control-label"></label>
+                <textarea asp-for="Note" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Note" class="text-danger"></span>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-12">
+                    <a href="#" class="btn btn-danger" data-dismiss="modal">Cancelar</a>
+                    <input type="submit" value="Editar cita" class="btn btn-info float-right">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+﻿D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Entities\ApplicationRole.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Entities\ApplicationUser.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Entities\ApplicationUserRole.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Entities\Appointment.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Entities\Clinic.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Entities\Doctor.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Entities\Entity.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Entities\Gender.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Entities\Parameters\AppointmentParameters.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Entities\Parameters\QueryStringParameters.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Entities\Patient.cs

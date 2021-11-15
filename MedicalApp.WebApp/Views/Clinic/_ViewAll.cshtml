@@ -1,0 +1,68 @@
+﻿@model IEnumerable<MedicalApp.WebApp.Models.ClinicViewModel>
+
+<table class="table table-hover">
+    <thead class="bg-primary text-white">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WebSite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telephone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WebSite)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telephone)
+                </td>
+                <td class="text-center">
+                    @if (item.IsActive)
+                    {
+                        <span class="badge bg-primary">Activo</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning">Inactivo</span>
+                    }
+                </td>
+                <td>
+                    <a onclick="showInPopup('@Url.Action("Edit","Clinic",new {id=item.Id}, "https")','Editar clínica')" class="btn btn-link">Editar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

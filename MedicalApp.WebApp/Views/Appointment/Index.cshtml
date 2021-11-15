@@ -1,0 +1,237 @@
+﻿@{
+    ViewData["Title"] = "Citas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/lib/fullcalendar/css/main.css" />
+<script type="text/javascript" src="~/lib/fullcalendar/js/main.js"></script>
+<script type="text/javascript" src="~/lib/fullcalendar/js/locales-all.js"></script>
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Citas</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                @if (ViewBag.ShowAddAppointmentButton)
+                {
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <a onclick="showInPopup('@Url.Action("Create","Appointment")','Agregar nueva cita')" class="btn btn-success btn-block">Agregar nueva cita</a>
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="sticky-top mb-3">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Búsqueda</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="ddlClinic">Clínica</label>
+                                            @Html.DropDownList("ddlClinic", (IEnumerable<SelectListItem>)ViewBag.Clinics, new { @class = "form-control" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ddlDoctor">Doctor</label>
+                                            @Html.DropDownList("ddlDoctor", (IEnumerable<SelectListItem>)ViewBag.Doctors, new { @class = "form-control" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ddlPatient">Paciente</label>
+                                            @Html.DropDownList("ddlPatient", (IEnumerable<SelectListItem>)ViewBag.Patients, new { @class = "form-control" })
+                                        </div>
+                                        <a class="btn btn-primary btn-block" onclick="GetAppointments();">Buscar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-9">
+                <div class="card card-primary">
+                    <div class="card-body p-0">
+                        <div id="calendar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content -->
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+<script type="text/javascript">
+    GetAppointments = function () {
+        var clinicId = $("#ddlClinic").val();
+        var doctorId = $("#ddlDoctor").val();
+        var patientId = $("#ddlPatient").val();
+
+        FecthAndRenderCalendar(clinicId, doctorId, patientId);
+    };
+
+    FecthAndRenderCalendar = function (clinicId, doctorId, patientId) {
+        //alert("Clinc: " + clinicId + " - Doctor: " + doctorId + " - Patient: " + patientId);
+        //alert("@Url.Action("GetAppointments", "Appointment")/" + clinicId + "/" + doctorId + "/" + patientId)
+        appointments = [];
+
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("GetAppointments", "Appointment")",
+            data: {
+                clinicId: clinicId,
+                doctorId: doctorId,
+                patientId: patientId
+            },
+            success: function (data) {
+                console.log("Data: " + JSON.stringify(data));
+                $.each(data, function (i, v) {
+                    console.log("eventID: " + v.id);
+
+                    appointments.push({
+                        eventID: v.id,
+                        title: v.reason,
+                        description: v.note,
+                        start: v.dateTimeStart,
+                        end: v.dateTimeEnd,
+                        color: "",
+                        allDay: false
+                    });
+                });
+
+                GenerateCalendar(appointments);
+            },
+            error: function (error) {
+                alert('Ha ocurrido un error al crear el calendario de citas...');
+            }
+        });
+    };
+
+    GenerateCalendar = function (appointments) {
+        var initialLocaleCode = 'es';
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            themeSystem: 'bootstrap',
+            locale: initialLocaleCode,
+            initialView: 'timeGridWeek',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+            },
+            selectable: true,
+            events: appointments,
+            eventClick: function (calEvent) {
+                console.log('eventId: ' + calEvent.event.extendedProps.eventID);
+                showInPopup('@Url.Action("Edit","Appointment")/' + calEvent.event.extendedProps.eventID, 'Editar cita');
+            },
+            //select: function (start, end) {
+            //    selectedEvent = {
+            //        eventID: 0,
+            //        title: '',
+            //        description: '',
+            //        start: start,
+            //        end: end,
+            //        allDay: false,
+            //        color: ''
+            //    };
+
+            //},
+            editable: false
+        });
+        calendar.render();
+    };
+
+        $(document).ready(function () {
+            var appointments = [];
+            var selectedAppointment = null;
+            //FecthAndRenderCalendar(0, 0, 0);
+
+            //GenerateCalendar();
+            GetAppointments();
+
+            AddOrEditAppointment = form => {
+                try {
+                    $.ajax({
+                        type: 'POST',
+                        url: form.action,
+                        data: new FormData(form),
+                        contentType: false,
+                        processData: false,
+                        success: function (res) {
+                            if (res.isValid) {
+                                FecthAndRenderCalendar();
+                                $('#form-modal .modal-body').html('');
+                                $('#form-modal .modal-title').html('');
+                                $('#form-modal').modal('hide');
+                            }
+                            else
+                                $('#form-modal .modal-body').html(res.html);
+                        },
+                        error: function (err) {
+                            console.log(err)
+                        }
+                    })
+                    //to prevent default form submit event
+                    return false;
+                } catch (ex) {
+                    console.log(ex)
+                }
+            }
+        });
+
+        //$(function () {
+        //    $('#dtpDateTimeStart').datetimepicker();
+        //});
+        //$(function () {
+        //    $('#dtpDateTimeEnd').datetimepicker();
+        //});
+</script>
+}
+
+<style>
+    #calendar.fc-theme-bootstrap {
+        font-size: 14px;
+    }
+
+    #top {
+        background: #eee;
+        border-bottom: 1px solid #ddd;
+        padding: 0 10px;
+        line-height: 40px;
+        font-size: 12px;
+        color: #000;
+    }
+
+        #top .selector {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        #top select {
+            font: inherit; /* mock what Boostrap does, don't compete  */
+        }
+
+    #calendar {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 0 10px;
+    }
+</style>

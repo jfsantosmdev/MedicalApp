@@ -1,0 +1,57 @@
+﻿@model  MedicalApp.WebApp.Models.SearchAppointmentViewModel
+
+<table class="table table-hover">
+    <thead class="bg-primary text-white">
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Razón
+            </th>
+            <th>
+                Fecha/Hora Inicio
+            </th>
+            <th>
+                Fecha/Hora Fin
+            </th>
+            <th>
+                Clínica
+            </th>
+            <th>
+                Doctor
+            </th>
+            <th>
+                Paciente
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Appointments)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reason)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTimeStart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTimeEnd)
+            </td>
+            <td>
+                <a onclick="showInPopup('@Url.Action("Details","Clinic",new {id=item.ClinicId}, "https")','Clínica')" href="#">@Html.DisplayFor(modelItem => item.Clinic.Name)</a>
+            </td>
+            <td>
+                <a onclick="showInPopup('@Url.Action("Details","Doctor",new {id=item.DoctorId}, "https")','Doctor')" href="#">@string.Format("{0} {1}", item.Doctor.Name, item.Doctor.LastName)</a>
+            </td>
+            <td>
+                <a onclick="showInPopup('@Url.Action("Details","Patient",new {id=item.PatientId}, "https")','Paciente')" href="#">@string.Format("{0} {1}", item.Patient.Name, item.Patient.LastName)</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

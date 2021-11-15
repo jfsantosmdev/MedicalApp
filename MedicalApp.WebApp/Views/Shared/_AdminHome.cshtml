@@ -1,0 +1,126 @@
+﻿@model MedicalApp.WebApp.Models.HomeViewModel
+<div class="text-center">
+    <h1 class="display-4">Agenda del día</h1>
+</div>
+<div class="row">
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>@Model.ScheduledAppointmentsCount</h3>
+
+                <p>Programadas</p>
+            </div>
+            @*<div class="icon">
+                    <i class="fa fa-calendar"></i>
+                </div>*@
+            @*<a href="#" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>*@
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-primary">
+            <div class="inner">
+                <h3>@Model.ConfirmedAppointmentsCount</h3>
+
+                <p>Confirmadas</p>
+            </div>
+            @*<div class="icon">
+                    <i class="fa fa-user-injured"></i>
+                </div>*@
+            @*<a href="#" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>*@
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>@Model.FinishedAppointmentsCount</h3>
+
+                <p>Finalizadas</p>
+            </div>
+            @*<div class="icon">
+                    <i class="fa fa-user-md"></i>
+                </div>
+                <a href="#" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>*@
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-secondary">
+            <div class="inner">
+                <h3>@Model.CancelledAppointmentsCount</h3>
+
+                <p>Canceladas</p>
+            </div>
+            @*<div class="icon">
+                    <i class="fa fa-clinic-medical"></i>
+                </div>
+                <a href="#" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>*@
+        </div>
+    </div>
+    <!-- ./col -->
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            @*<div class="card-header">
+                <h3 class="card-title">Citas del día</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>*@
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table m-0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Clínica</th>
+                                <th>Doctor</th>
+                                <th>Paciente</th>
+                                <th>Horario</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Appointments)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.Clinic.Name</td>
+                                    <td>@string.Format("{0} {1}", item.Doctor.Name, item.Doctor.LastName)</td>
+                                    <td>@string.Format("{0} {1}", item.Patient.Name, item.Patient.LastName)</td>
+                                    <td>@item.DateTimeStart</td>
+                                    <td>
+                                        @if (item.Status == AppointmentStatus.Programada)
+                                        {
+                                            <span class="badge badge-warning">@item.Status</span>
+                                        }
+                                        else if (item.Status == AppointmentStatus.Confirmada)
+                                        {
+                                            <span class="badge badge-primary">@item.Status</span>
+                                        }
+                                        else if (item.Status == AppointmentStatus.Finalizada)
+                                        {
+                                            <span class="badge badge-success">@item.Status</span>
+                                        }
+                                        else if (item.Status == AppointmentStatus.Cancelada)
+                                        {
+                                            <span class="badge badge-secondary">@item.Status</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

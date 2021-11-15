@@ -1,0 +1,36 @@
+﻿@model IEnumerable<MedicalApp.WebApp.Models.DoctorViewModel>
+
+@{
+    ViewData["Title"] = "Doctores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Doctores</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<div class="content">
+    <div class="container-fluid">
+        @*<p>
+            <a id="btnAddDoctor" onclick="showInPopup('@Url.Action("Create","Doctor", Context.Request.Scheme)','Agregar nuevo doctor')" class="btn btn-success">Agregar nuevo doctor</a>
+        </p>*@
+        <div id="view-all">
+            @await Html.PartialAsync("_ViewAll", Model)
+        </div>
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content -->
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,89 @@
+﻿@model MedicalApp.WebApp.Models.Auth.RegisterDoctorViewModel
+
+@{
+    ViewData["Title"] = "Registrar Doctor";
+    Layout = "/Views/Shared/_RegisterLayout.cshtml";
+}
+
+<div class="card card-outline card-primary">
+    <div class="card-header text-center">
+        <a href="#" class="h1"><b>Medical</b>App</a>
+    </div>
+    <div class="card-body">
+        <p class="register-box-msg">Registrar un nuevo doctor</p>
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <p class="alert alert-default-danger">
+                @ViewBag.ErrorMessage
+            </p>
+        }
+        <form asp-action="RegisterDoctor" asp-controller="Auth" method="post">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="LastName" class="control-label"></label>
+                            <input asp-for="LastName" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="BirthDate" class="control-label"></label>
+                            <input asp-for="BirthDate" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="BirthDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Gender" class="control-label"></label>
+                            <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-control">
+                                <option selected="selected" value="">Seleccionar</option>
+                            </select>
+                            <span asp-validation-for="Gender" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Register.Email" class="control-label"></label>
+                    <input asp-for="Register.Email" class="form-control" autocomplete="off" />
+                    <span asp-validation-for="Register.Email" class="text-danger"></span>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Register.Password" class="control-label"></label>
+                            <input asp-for="Register.Password" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="Register.Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Register.ConfirmPassword" class="control-label"></label>
+                            <input asp-for="Register.ConfirmPassword" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="Register.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-12">
+                        @*<a href="#" class="btn btn-danger" data-dismiss="modal">Cancelar</a>*@
+                        <a href="@Url.Action("Login", "Auth")" class="btn btn-danger">Cancelar</a>
+                        <input type="submit" value="Registrar" class="btn btn-info float-right">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- /.form-box -->
+</div>

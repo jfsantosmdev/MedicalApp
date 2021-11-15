@@ -1,0 +1,39 @@
+﻿@model MedicalApp.WebApp.Models.HomeViewModel
+@using Microsoft.AspNetCore.Http
+@using MedicalApp.WebApp.Models.Auth
+@using Newtonsoft.Json
+@{
+    LoginResponseViewModel login = JsonConvert.DeserializeObject<LoginResponseViewModel>(Context.Session.GetString(SessionKeys.Login));
+}
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0"></h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<div class="content">
+    <div class="container-fluid">
+        @if (login.IsInRole("Administrator"))
+        {
+            @await Html.PartialAsync("_AdminHome")
+        }
+        else if (login.IsInRole("Doctor"))
+        {
+            @await Html.PartialAsync("_DoctorHome")
+        }
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content -->

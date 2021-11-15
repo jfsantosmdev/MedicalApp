@@ -1,0 +1,5 @@
+﻿D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Abstractions\ICrud.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Abstractions\IDbContext.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Abstractions\IEntity.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Abstractions\IMailParameters.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Abstractions\ITokenParameters.cs

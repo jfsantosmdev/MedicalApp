@@ -1,0 +1,6 @@
+﻿D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.DataAccess\ApiDbContext.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.DataAccess\AppointmentDbContext.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.DataAccess\ClinicDbContext.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.DataAccess\DbContext.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.DataAccess\DoctorDbContext.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.DataAccess\PatientDbContext.cs

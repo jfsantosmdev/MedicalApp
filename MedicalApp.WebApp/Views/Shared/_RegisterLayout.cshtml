@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title | Medical App</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="~/lib/fontawesome/dist/css/all.min.css" />
+    <!-- iCheck-Bootstrap -->
+    <link rel="stylesheet" href="~/lib/icheck-bootstrap/dist/css/icheck-bootstrap.min.css" />
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/lib/adminlte/dist/css/adminlte.min.css" />
+    <style type="text/css">
+        .register-box {
+            width: 460px !important;
+        }
+    </style>
+</head>
+<body class="register-page" style="min-height: 466px;">
+    <div class="register-box">
+        @RenderBody()
+    </div>
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/lib/adminlte/dist/js/adminlte.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

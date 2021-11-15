@@ -1,0 +1,61 @@
+﻿@model MedicalApp.WebApp.Models.Auth.LoginViewModel
+
+@{
+    ViewData["Title"] = "Iniciar Sesión";
+    Layout = "/Views/Shared/_LoginLayout.cshtml";
+}
+
+<div class="card card-outline card-primary">
+    <div class="card-header text-center">
+        <a asp-action="Login" class="h1"><b>Medical</b>App</a>
+    </div>
+    <div class="card-body">
+        <p class="login-box-msg">
+            Regístrese para iniciar su sesión
+        </p>
+        @if(ViewBag.ErrorMessage != null)
+        {
+            <p class="alert alert-default-danger">
+                @ViewBag.ErrorMessage
+            </p>
+        }
+        <form asp-controller="Auth" asp-action="Login" method="post" asp-route-returnurl = "@Model.ReturnUrl">
+            <div asp-validation-summary="@ValidationSummary.ModelOnly"></div>
+            <div class="form-group mb-3">
+                <label asp-for="Email"></label>
+                <input type="email" asp-for="Email" class="form-control" autocomplete="on">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Password"></label>
+                <input type="password" asp-for="Password" class="form-control" autocomplete="on">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="icheck-primary">
+                        <input type="checkbox" asp-for="RememberMe" id="remember">
+                        <label for="remember">
+                            Recuérdame
+                        </label>
+                    </div>
+                </div>
+                <!-- /.col -->
+            </div>
+            <div class="row mt-3 mb-3">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+
+        <p class="mb-1 text-center">
+            <a href="#">¿Olvidaste tu contraseña?</a>
+        </p>
+        <p class="mb-0 text-center">
+            <a href="@Url.Action("RegisterDoctor", "Auth")" class="text-center">Registrar un nuevo doctor</a>
+        </p>
+    </div>
+    <!-- /.card-body -->
+</div>

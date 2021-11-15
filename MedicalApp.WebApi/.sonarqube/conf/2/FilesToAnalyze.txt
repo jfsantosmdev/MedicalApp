@@ -1,0 +1,4 @@
+﻿D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Services\JwtConfig.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Services\MailConfig.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Services\MailService.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Services\TokenHandlerService.cs

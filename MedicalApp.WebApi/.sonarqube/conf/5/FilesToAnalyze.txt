@@ -1,0 +1,5 @@
+﻿D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Application\Application.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Application\AppointmentApplication.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Application\ClinicApplication.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Application\DoctorApplication.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Application\PatientApplication.cs

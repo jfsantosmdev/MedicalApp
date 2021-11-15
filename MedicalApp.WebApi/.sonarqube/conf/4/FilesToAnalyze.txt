@@ -1,0 +1,5 @@
+﻿D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Repository\AppointmentRepository.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Repository\ClinicRepository.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Repository\DoctorRepository.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Repository\PatientRepository.cs
+D:\jfsantosmdev\MedicalAppointmentApi\MedicalApp.Repository\Repository.cs
