@@ -24,6 +24,12 @@
             <th>
                 Paciente
             </th>
+            <th>
+                Estado
+            </th>
+            <th>
+                Acciones
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -50,6 +56,27 @@
             </td>
             <td>
                 <a onclick="showInPopup('@Url.Action("Details","Patient",new {id=item.PatientId}, "https")','Paciente')" href="#">@string.Format("{0} {1}", item.Patient.Name, item.Patient.LastName)</a>
+            </td>
+            <td>
+                @if (item.Status == AppointmentStatus.Programada)
+                {
+                    <span class="badge badge-warning">@item.Status</span>
+                }
+                else if (item.Status == AppointmentStatus.Confirmada)
+                {
+                    <span class="badge badge-primary">@item.Status</span>
+                }
+                else if (item.Status == AppointmentStatus.Finalizada)
+                {
+                    <span class="badge badge-success">@item.Status</span>
+                }
+                else if (item.Status == AppointmentStatus.Cancelada)
+                {
+                    <span class="badge badge-secondary">@item.Status</span>
+                }
+            </td>
+            <td>
+                <a href="#" class="nav-link text-primary" onclick="showInPopup('@Url.Action("Details","Appointment", new { id = item.Id })', 'Detalles de la cita');">Ver detalle</a>
             </td>
         </tr>
         }

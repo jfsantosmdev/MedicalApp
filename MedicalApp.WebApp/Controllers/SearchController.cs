@@ -59,6 +59,9 @@ namespace MedicalApp.WebApp.Controllers
                     parameters = parameters + "doctorId=" + model.ListOfDoctors.FirstOrDefault().Value + "&";
                 }
 
+                if (model.Status != null)
+                    parameters = parameters = "status=" + (int)model.Status + "&";
+
                 if (model.PatientId != null)
                     parameters = parameters + "patientId=" + model.PatientId.ToString() + "&";
 

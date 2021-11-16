@@ -13,6 +13,15 @@ namespace MedicalApp.WebApp.Models
         [Required(ErrorMessage = "El campo es obligatorio")]
         [Display(Name = "Apellido")]
         public string LastName { get; set; }
+        [Display(Name = "Nombre Completo")]
+        public string FullName
+        {
+            get
+            {
+                return Name + " " + LastName;
+            }
+        }
+
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "El campo es obligatorio")]
         [Display(Name = "Fecha de Nacimiento")]

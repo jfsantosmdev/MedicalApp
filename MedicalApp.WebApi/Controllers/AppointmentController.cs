@@ -42,10 +42,23 @@ namespace MedicalApp.WebApi.Controllers
         }
 
         [HttpGet]
+        [Route("GetAvailableAppointments")]
+        public IActionResult GetAvailableAppointments([FromQuery] AppointmentParameters appointmentParameters)
+        {
+            return Ok(_appointment.GetAvailableAppointments(appointmentParameters));
+        }
+
+        [HttpGet]
         [Route("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
             return Ok(await _appointment.GetByIdAsync(id));
+        }
+        [HttpGet]
+        [Route("{id:int}/GetDetails")]
+        public IActionResult GetDetails(int id)
+        {
+            return Ok(_appointment.GetAppointmentById(id));
         }
 
         [HttpGet]
@@ -140,6 +153,7 @@ namespace MedicalApp.WebApi.Controllers
                 tmp.Reason = dto.Reason;
                 tmp.Note = dto.Note;
                 tmp.UserId = null;
+                tmp.Status = dto.Status;
                 tmp.UpdatedDate = DateTime.Now;
             }
 

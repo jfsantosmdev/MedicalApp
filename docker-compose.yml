@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  medicalapp.webapp:
+    image: ${DOCKER_REGISTRY-}medicalappwebapp
+    build:
+      context: .
+      dockerfile: MedicalApp.WebApp/Dockerfile
+
+  medicalapp.webapi:
+    image: ${DOCKER_REGISTRY-}medicalappwebapi
+    build:
+      context: .
+      dockerfile: MedicalApp.WebApi/Dockerfile
+

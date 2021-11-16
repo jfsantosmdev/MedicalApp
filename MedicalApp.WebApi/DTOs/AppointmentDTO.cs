@@ -14,5 +14,6 @@ namespace MedicalApp.WebApi.DTOs
         public string Reason { get; set; }
         public string Note { get; set; }
         public int? UserId { get; set; }
+        public AppointmentStatus Status { get; set; }
     }
 }

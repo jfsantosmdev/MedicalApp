@@ -14,6 +14,14 @@ namespace MedicalApp.WebApp.Models
         [Required(ErrorMessage = "El campo es obligatorio")]
         [Display(Name = "Apellido")]
         public string LastName { get; set; }
+        [Display(Name = "Nombre Completo")]
+        public string FullName
+        {
+            get
+            {
+                return Name + " " + LastName;
+            }
+        }
         [MinimumAge(18, ErrorMessage = "{0} debe ser alguien de al menos {1} años de edad")]
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "El campo es obligatorio")]

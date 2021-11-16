@@ -111,7 +111,8 @@
                         description: v.note,
                         start: v.dateTimeStart,
                         end: v.dateTimeEnd,
-                        color: "",
+                        color: (v.status == 1) ? "#f0ad4e" : (v.status == 2) ? "#337ab7" : (v.status == 3) ? "#777777" : (v.status == 4) ? "#5cb85c" : "#d9534f",
+                        textColor: (v.status == 1) ? "#000000" : (v.status == 2) ? "#ffffff" : (v.status == 3) ? "#ffffff" : (v.status == 4) ? "#ffffff" : "#ffffff",
                         allDay: false
                     });
                 });
@@ -141,6 +142,7 @@
             eventClick: function (calEvent) {
                 console.log('eventId: ' + calEvent.event.extendedProps.eventID);
                 showInPopup('@Url.Action("Edit","Appointment")/' + calEvent.event.extendedProps.eventID, 'Editar cita');
+                @*showInPopup('@Url.Action("Details","Appointment")/' + calEvent.event.extendedProps.eventID, 'Detalles de la cita');*@
             },
             //select: function (start, end) {
             //    selectedEvent = {

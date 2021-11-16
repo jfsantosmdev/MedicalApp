@@ -12,7 +12,8 @@ namespace MedicalApp.Application
         IList<Appointment> GetAppointments(AppointmentParameters appointmentParameters);
         IList<Appointment> GetAppointmentsByDoctorId(int id);
         IList<Appointment> GetAllByDoctorId(int id);
-
+        Appointment GetAppointmentById(int id);
+        IList<Appointment> GetAvailableAppointments(AppointmentParameters appointmentParameters);
     }
     public class AppointmentApplication : Application<Appointment>, IAppointmentApplication
     {
@@ -27,6 +28,11 @@ namespace MedicalApp.Application
             return _repo.GetAllByDoctorId(id);
         }
 
+        public Appointment GetAppointmentById(int id)
+        {
+            return _repo.GetAppointmentById(id);
+        }
+
         public IList<Appointment> GetAppointments(AppointmentParameters appointmentParameters)
         {
             return _repo.GetAppointments(appointmentParameters);
@@ -35,6 +41,11 @@ namespace MedicalApp.Application
         public IList<Appointment> GetAppointmentsByDoctorId(int id)
         {
             return _repo.GetAppointmentsByDoctorId(id);
+        }
+
+        public IList<Appointment> GetAvailableAppointments(AppointmentParameters appointmentParameters)
+        {
+            return _repo.GetAvailableAppointments(appointmentParameters);
         }
     }
 }

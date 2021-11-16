@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "composeLaunchServiceName": "medicalapp.webapp",
+      "serviceActions": {
+        "medicalapp.webapi": "StartDebugging",
+        "medicalapp.webapp": "StartDebugging"
+      },
+      "composeLaunchAction": "LaunchBrowser",
+      "commandVersion": "1.0",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}"
+    }
+  }
+}

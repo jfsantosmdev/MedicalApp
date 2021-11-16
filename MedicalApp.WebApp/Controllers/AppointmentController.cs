@@ -111,7 +111,7 @@ namespace MedicalApp.WebApp.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(int id, [Bind("Id,ClinicId,DoctorId,PatientId,DateTimeStart,DateTimeEnd,Reason,Note")] AppointmentViewModel model)
+        public async Task<ActionResult> Edit(int id, [Bind("Id,ClinicId,DoctorId,PatientId,DateTimeStart,DateTimeEnd,Reason,Note,Status")] AppointmentViewModel model)
         {
             model.ListOfClincs = GetClinics();
             model.ListOfDoctors = GetAvailableDoctors();
@@ -148,7 +148,7 @@ namespace MedicalApp.WebApp.Controllers
             AppointmentViewModel model = new AppointmentViewModel();
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync(_apiBaseUrl + "/api/Appointment/" + id))
+                using (var response = await httpClient.GetAsync(_apiBaseUrl + "/api/Appointment/" + id + "/GetDetails"))
                 {
                     if (response.StatusCode == HttpStatusCode.OK)
                     {
@@ -283,6 +283,32 @@ namespace MedicalApp.WebApp.Controllers
                     parameters = parameters + "patientId=" + patientId.ToString();
 
                 using (var response = await httpClient.GetAsync(_apiBaseUrl + "/api/Appointment?" + parameters))
+                {
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        appointments = JsonConvert.DeserializeObject<List<AppointmentViewModel>>(apiResponse);
+                    }
+                }
+            }
+
+            return Json(appointments);
+        }
+        [HttpGet]
+        public async Task<ActionResult> GetAvailableAppointments(int clinicId, int doctorId, int patientId)
+        {
+            List<AppointmentViewModel> appointments = new List<AppointmentViewModel>();
+            using (var httpClient = new HttpClient())
+            {
+                string parameters = string.Empty;
+                if (clinicId != 0)
+                    parameters = parameters + "clinicId=" + clinicId.ToString() + "&";
+                if (doctorId != 0)
+                    parameters = parameters + "doctorId=" + doctorId.ToString() + "&";
+                if (patientId != 0)
+                    parameters = parameters + "patientId=" + patientId.ToString();
+
+                using (var response = await httpClient.GetAsync(_apiBaseUrl + "/api/Appointment/GetAvailableAppointments?" + parameters))
                 {
                     if (response.StatusCode == HttpStatusCode.OK)
                     {

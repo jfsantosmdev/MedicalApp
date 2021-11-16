@@ -14,9 +14,13 @@ namespace MedicalApp.WebApp.Models
         [Display(Name = "Paciente")]
         public int? PatientId { get; set; } 
         [Required(ErrorMessage = "Campo obligatorio")]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? DateStart { get; set; }
         [Required(ErrorMessage = "Campo obligatorio")]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? DateEnd { get; set; }
+        [Display(Name = "Estado")]
+        public AppointmentStatus? Status { get; set; }
         public List<SelectListItem> ListOfClinics { get; set; }
         public List<SelectListItem> ListOfDoctors { get; set; }
         public List<SelectListItem> ListOfPatients { get; set; }

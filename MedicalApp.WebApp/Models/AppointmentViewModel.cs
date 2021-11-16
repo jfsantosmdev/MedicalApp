@@ -37,6 +37,7 @@ namespace MedicalApp.WebApp.Models
 
         public string Note { get; set; }
         public int? UserId { get; set; }
+        [Display(Name = "Estado")]
         public AppointmentStatus Status { get; set; }
         public ClinicViewModel Clinic { get; set; }
         public DoctorViewModel Doctor { get; set; }

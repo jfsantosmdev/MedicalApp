@@ -1,0 +1,84 @@
+﻿@model MedicalApp.WebApp.Models.AppointmentViewModel
+@{
+    ViewData["Title"] = "Detalles de la cita";
+    Layout = null;
+}
+<div>
+    <dl class="row">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.ClinicId)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Clinic.Name)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.DoctorId)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Doctor.FullName)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.PatientId)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Patient.FullName)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.DateTimeStart)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.DateTimeStart)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.DateTimeEnd)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.DateTimeEnd)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Reason)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Reason)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class="col-sm-8">
+            @if (Model.Status == AppointmentStatus.Programada)
+            {
+                <span class="badge badge-warning">@Model.Status</span>
+            }
+            else if (Model.Status == AppointmentStatus.Confirmada)
+            {
+                <span class="badge badge-primary">@Model.Status</span>
+            }
+            else if (Model.Status == AppointmentStatus.Finalizada)
+            {
+                <span class="badge badge-success">@Model.Status</span>
+            }
+            else if (Model.Status == AppointmentStatus.Cancelada)
+            {
+                <span class="badge badge-secondary">@Model.Status</span>
+            }
+        </dd>
+    </dl>
+</div>
+<div class="row">
+    <div class="col-12">
+        <a href="#" class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
+        @*<a href="#" class="btn btn-info float-right" onclick="showInPopup('@Url.Action("Edit","Appointment", new { id = Model.Id })', 'Editar cita');">Editar</a>*@
+    </div>
+</div>
