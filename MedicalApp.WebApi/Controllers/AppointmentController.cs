@@ -169,12 +169,12 @@ namespace MedicalApp.WebApi.Controllers
                 builder.HtmlBody = SourceReader.ReadToEnd();
             }
 
-            string emailTemplateText = string.Format(builder.HtmlBody, "Cita reprogramada", patient.Name + " " + patient.LastName, tmp.DateTimeStart.ToString("dd/MM/yyyy HH:mm"), tmp.Reason, clinic.Name + " (" + clinic.Address + ")");
+            string emailTemplateText = string.Format(builder.HtmlBody, "Cita " + tmp.Status, patient.Name + " " + patient.LastName, tmp.DateTimeStart.ToString("dd/MM/yyyy HH:mm"), tmp.Reason, clinic.Name + " (" + clinic.Address + ")");
 
             await _mailService.SendEmailAsync(new MailParameters
             {
                 ToEmail = patient.Email,
-                Subject = "Cita reprogramada",
+                Subject = "Cita " + tmp.Status,
                 Body = emailTemplateText
             });
             return Ok(tmp);
