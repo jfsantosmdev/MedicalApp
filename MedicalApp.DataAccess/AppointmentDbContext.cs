@@ -44,7 +44,7 @@ namespace MedicalApp.DataAccess
             if (appointmentParameters.Status != null)
                 appointments = appointments.Where(a => a.Status == appointmentParameters.Status);
 
-            return appointments.OrderByDescending(a => a.DateTimeStart).Skip((appointmentParameters.PageNumber - 1) * appointmentParameters.PageSize).Take(appointmentParameters.PageSize).ToList();
+            return appointments.OrderByDescending(a => a.DateTimeStart).ToList();//.Skip((appointmentParameters.PageNumber - 1) * appointmentParameters.PageSize).Take(appointmentParameters.PageSize).ToList();
 
         }
 

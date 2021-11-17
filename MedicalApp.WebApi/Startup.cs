@@ -110,7 +110,7 @@ namespace MedicalApp.WebApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MedicalApp.WebApi v1"));
             }
 
-            db.Database.Migrate();
+            //db.Database.Migrate();
             //app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
