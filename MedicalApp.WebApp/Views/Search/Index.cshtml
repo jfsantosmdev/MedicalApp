@@ -103,7 +103,10 @@
                     processData: false,
                     success: function (res) {
                         if (res.isValid) {
-
+                            console.log(JSON.stringify(res))
+                            $('#form-modal').modal('hide')
+                            
+                            location.reload()
                         }
                         else {
                             $('#form-modal .modal-body').html(res.html);

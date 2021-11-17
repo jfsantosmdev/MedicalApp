@@ -128,7 +128,7 @@ namespace MedicalApp.WebApp.Controllers
                 }
 
                 
-                return Json(new { isValid = false, html = Helper.RenderRazorViewToString(this, "Index", model) });
+                return Json(new { isValid = true, html = Helper.RenderRazorViewToString(this, "Index", model) });
             }
             return Json(new { isValid = false, html = Helper.RenderRazorViewToString(this, "Index", model) });
         }

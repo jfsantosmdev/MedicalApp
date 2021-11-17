@@ -16,10 +16,12 @@ namespace MedicalApp.WebApi.Controllers
     public class DiagnosisController : ControllerBase
     {
         IDiagnosisApplication _diagnosis;
+        IAppointmentApplication _appointment;
         //IApplication<DiagnosisFile> _application;
-        public DiagnosisController(IDiagnosisApplication diagnosis)
+        public DiagnosisController(IDiagnosisApplication diagnosis, IAppointmentApplication appointment)
         {
             _diagnosis = diagnosis;
+            _appointment = appointment;
             //_application = application;
         }
         // GET: api/<DiagnosisController>
@@ -47,6 +49,10 @@ namespace MedicalApp.WebApi.Controllers
                 };
 
                 await _diagnosis.SaveAsync(d);
+
+                var appointment = _appointment.GetById(dto.AppointmentId);
+                appointment.Status = AppointmentStatus.Finalizada;
+                await _appointment.SaveAsync(appointment);
                 return Ok(d.Id);
             }
             else
@@ -60,6 +66,11 @@ namespace MedicalApp.WebApi.Controllers
                     tmp.UpdatedDate = DateTime.Now;
 
                     await _diagnosis.SaveAsync(tmp);
+
+                    var appointment = _appointment.GetById(dto.AppointmentId);
+                    appointment.Status = AppointmentStatus.Finalizada;
+                    await _appointment.SaveAsync(appointment);
+
                     return Ok(tmp.Id);
                 }
             }
