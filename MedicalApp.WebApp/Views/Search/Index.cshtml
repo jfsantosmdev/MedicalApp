@@ -91,51 +91,33 @@
 <!-- /.content -->
 
 @section Scripts{
+
     <script type="text/javascript">
-        $(function () {
-            //$('#datetimepicker1').datetimepicker({
-            //    format: 'DD/MM/YYYY',
-            //    useCurrent: false,
-            //    showTodayButton: true,
-            //    showClear: true,
-            //    toolbarPlacement: 'bottom',
-            //    sideBySide: true,
-            //    stepping: 15,
-            //    icons: {
-            //        time: "fa fa-clock-o",
-            //        date: "fa fa-calendar",
-            //        up: "fa fa-arrow-up",
-            //        down: "fa fa-arrow-down",
-            //        previous: "fa fa-chevron-left",
-            //        next: "fa fa-chevron-right",
-            //        today: "fa fa-clock-o",
-            //        clear: "fa fa-trash-o"
-            //    }
-            //});
+        AddOrEditDiagnosis = form => {
+            try {
+                $.ajax({
+                    type: 'POST',
+                    url: form.action,
+                    data: new FormData(form),
+                    contentType: false,
+                    processData: false,
+                    success: function (res) {
+                        if (res.isValid) {
 
-            //$('#datetimepicker2').datetimepicker({
-            //    format: 'DD/MM/YYYY',
-            //    useCurrent: false,
-            //    showTodayButton: true,
-            //    showClear: true,
-            //    toolbarPlacement: 'bottom',
-            //    sideBySide: true,
-            //    stepping: 15,
-            //    icons: {
-            //        time: "fa fa-clock-o",
-            //        date: "fa fa-calendar",
-            //        up: "fa fa-arrow-up",
-            //        down: "fa fa-arrow-down",
-            //        previous: "fa fa-chevron-left",
-            //        next: "fa fa-chevron-right",
-            //        today: "fa fa-clock-o",
-            //        clear: "fa fa-trash-o"
-            //    }
-            //});
-
-
-        });
-
-
+                        }
+                        else {
+                            $('#form-modal .modal-body').html(res.html);
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err)
+                    }
+                })
+                //to prevent default form submit event
+                return false;
+            } catch (ex) {
+                console.log(ex)
+            }
+        }
     </script>
 }

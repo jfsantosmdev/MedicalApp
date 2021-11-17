@@ -1,0 +1,52 @@
+﻿@model MedicalApp.WebApp.Models.DiagnosisViewModel
+
+@{
+    ViewData["Title"] = "Agregar diagnostico";
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Index" onsubmit="return AddOrEditDiagnosis(this);">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.AppointmentId)
+            <div class="form-group">
+                <label asp-for="Comments" class="control-label"></label>
+                <textarea asp-for="Comments" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Comments" class="text-danger"></span>
+            </div>
+            @if (Model.Files.Count > 0)
+            {
+                <h5 class="mt-2 text-muted">Archivos de Diagnóstico</h5>
+                <ul class="list-unstyled">
+                    @foreach (var item in Model.Files)
+                    {
+                        <li>
+                            <a href="@Url.Action("DownloadFile", "Diagnosis", new { id = item.Id })" target="_blank" class="btn-link text-secondary">
+                                <i class="far fa-fw fa-file-pdf"></i>
+                                @item.Name
+                            </a>
+                        </li>
+                    }
+                </ul>
+            }
+            <div class="card bg-gray-light">
+                <div class="card-body m-0">
+                    <input type="file" name="files" accept=".jpg,.jpeg,.png,.pdf" multiple/>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-12">
+                    <a href="#" class="btn btn-danger" data-dismiss="modal">Cancelar</a>
+                    <input type="submit" value="Agregar diagnostico" class="btn btn-info float-right">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

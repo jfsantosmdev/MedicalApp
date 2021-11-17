@@ -76,7 +76,7 @@
                 }
             </td>
             <td>
-                <a href="#" class="nav-link text-primary" onclick="showInPopup('@Url.Action("Details","Appointment", new { id = item.Id })', 'Detalles de la cita');">Ver detalle</a>
+                <a href="#" alt="Ver detalle" class="btn btn-sm btn-primary fa fa-eye" onclick="showInPopup('@Url.Action("Details","Appointment", new { id = item.Id })', 'Detalles de la cita');"></a> <a class="btn btn-sm btn-warning fa fa-edit" alt="Diagnostico" onclick="showInPopup('@Url.Action("Index","Diagnosis",new {appointmentId = item.Id}, "https")','Diagnóstico')"></a>
             </td>
         </tr>
         }

@@ -14,6 +14,8 @@ namespace MedicalApp.DataAccess
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Diagnosis> Diagnostics { get; set; }
+        public DbSet<DiagnosisFile> DiagnosticsFiles { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -56,6 +58,21 @@ namespace MedicalApp.DataAccess
                 entity.Property(e => e.Cost).HasPrecision(10, 2);
             });
 
+            modelBuilder.Entity<Diagnosis>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasOne(e => e.Appointment);
+                entity.Property(e => e.Comments).HasMaxLength(1000);
+            });
+
+            modelBuilder.Entity<DiagnosisFile>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasOne(e => e.Diagnosis);
+                entity.Property(e => e.Description).HasMaxLength(500);
+                entity.Property(e => e.Name).HasMaxLength(250);
+                entity.Property(e => e.Type).HasMaxLength(10);
+            });
         }
     }
 }
