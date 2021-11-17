@@ -111,7 +111,7 @@
                         description: v.note,
                         start: v.dateTimeStart,
                         end: v.dateTimeEnd,
-                        color: (v.status == 1) ? "#f0ad4e" : (v.status == 2) ? "#337ab7" : (v.status == 3) ? "#777777" : (v.status == 4) ? "#5cb85c" : "#d9534f",
+                        color: (v.status == 1) ? "#ffc107" : (v.status == 2) ? "#007bff" : (v.status == 3) ? "#28a745" : (v.status == 4) ? "#6c757d" : "",
                         textColor: (v.status == 1) ? "#000000" : (v.status == 2) ? "#ffffff" : (v.status == 3) ? "#ffffff" : (v.status == 4) ? "#ffffff" : "#ffffff",
                         allDay: false
                     });
@@ -179,7 +179,8 @@
                         processData: false,
                         success: function (res) {
                             if (res.isValid) {
-                                FecthAndRenderCalendar();
+                                //FecthAndRenderCalendar();
+                                GetAppointments();
                                 $('#form-modal .modal-body').html('');
                                 $('#form-modal .modal-title').html('');
                                 $('#form-modal').modal('hide');
